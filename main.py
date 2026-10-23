@@ -5,6 +5,8 @@ from targets.local_target import LocalTarget
 from targets.remote_target import RemoteTarget
 from checks.ssh_audit import run_ssh_checks
 from checks.permissions_audit import run_permission_checks
+from checks.users_audit import run_user_checks
+from checks.firewall_audit import run_firewall_checks
 from utils.reporter import display_results
 from rich.console import Console
 
@@ -67,8 +69,12 @@ def main():
         
         # Coleta resultados de Permissões
         all_results.extend(run_permission_checks(target))
-        
-        # (Futuros módulos podem ser adicionados aqui com all_results.extend(...))
+
+        #Coleta resultados do usuario
+        all_results.extend(run_user_checks(target))
+
+        #Coleta resultados do firewall
+        all_results.extend(run_firewall_checks(target))
 
         console.print("\n[+] Auditoria concluída com sucesso! Gerando relatório...\n", style="bold green")
         
