@@ -36,6 +36,7 @@ server-hardening-auditor/
 │   ├── firewall_audit.py
 │   ├── permissions_audit.py
 │   ├── ssh_audit.py
+│   ├── sysctl_audit.py
 │   └── users_audit.py
 │
 ├── reports/                 # Pasta de saída dos relatórios exportados (JSON / MD)
@@ -44,7 +45,9 @@ server-hardening-auditor/
 │   ├── local_target.py
 │   └── remote_target.py
 │
+├── tests/
 ├── utils/                   # Utilitários de formatação e relatórios
+│   ├── plugin_loader.py
 │   └── reporter.py
 │
 ├── main.py                  # Ponto de entrada da aplicação (CLI)
@@ -86,6 +89,7 @@ Para conectar e auditar um servidor remoto utilizando uma chave SSH privada:
 
 ```bash
 python main.py --target remote --host 192.168.1.50 --user ubuntu --key ~/.ssh/id_rsa
+
 ```
 
 ### 3. Exportando Relatórios
@@ -117,6 +121,9 @@ Você pode exportar os resultados da auditoria diretamente para arquivos adicion
 [*] Iniciando auditoria no ambiente LOCAL...
 [+] Conexão estabelecida com sucesso!
 
+[*] Carregando plugins de auditoria...
+[+] 5 módulos de checagem carregados com sucesso.
+
 [*] Executando módulos de auditoria...
 
 [+] Auditoria concluída com sucesso! Gerando relatório...
@@ -124,7 +131,7 @@ Você pode exportar os resultados da auditoria diretamente para arquivos adicion
 ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Categoria         ┃ Item Auditado                            ┃ Status   ┃ Detalhes / Recomendações                       ┃
 ┡━━━━━━━━━━━━━━━━━━━╂━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╂━━━━━━━━━━╂━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ SSH Security      │ Desativar Login Direto de Root           │ ✅ PASS  │ Configuração segura: 'PermitRootLogin no'      │
+│ SSH Security      │ Desativar Login Direto de Root           │ ✅ PASS  │ Configuração segura: permitrootlogin no        │
 ├───────────────────┼──────────────────────────────────────────┼──────────┼────────────────────────────────────────────────┤
 │ File Permissions  │ Permissões restritas no /etc/shadow      │ ✅ PASS  │ Permissões seguras encontradas: 000            │
 ├───────────────────┼──────────────────────────────────────────┼──────────┼────────────────────────────────────────────────┤
@@ -136,10 +143,11 @@ Você pode exportar os resultados da auditoria diretamente para arquivos adicion
 ┌───────────────────────────────────────┐
 │           Resumo Executivo            │
 ├───────────────────────────────────────┤
-│ Total de Checagens: 4                 │
-│ Aprovadas: 3                          │
-│ Score de Conformidade: 75.0%          │
+│ Total de Checagens: 5                 │
+│ Aprovadas: 4                          │
+│ Score de Conformidade: 80.0%          │
 └───────────────────────────────────────┘
+
 ```
 
 ---
