@@ -17,6 +17,7 @@ O **Armadillo** é uma ferramenta leve desenvolvida em Python voltada para equip
 - **Módulos de Checagem Abrangentes:**
   -  **SSH Security:** Validação de diretivas críticas (como `PermitRootLogin`).
   -  **File Permissions:** Verificação de permissões sensíveis em arquivos vitais (ex: `/etc/shadow`).
+  - **Mapeamento para CIS Benchmarks:** Cada regra de auditoria identifica o controle correspondente do CIS Benchmark, facilitando auditorias de conformidade corporativa.
   -  **User Management:** Detecção de contas secundárias com privilégios totais (`UID 0`).
   -  **Network Security:** Monitoramento do estado do firewall (`UFW`).
 - **Resumo Gerencial e Compliance Score:** Cálculo automático de pontuação de conformidade com base nos resultados das checagens.
@@ -127,17 +128,17 @@ Você pode exportar os resultados da auditoria diretamente para arquivos adicion
 
 [+] Auditoria concluída com sucesso! Gerando relatório...
 
-┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Categoria         ┃ Item Auditado                            ┃ Status   ┃ Detalhes / Recomendações                       ┃
-┡━━━━━━━━━━━━━━━━━━━╂━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╂━━━━━━━━━━╂━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ SSH Security      │ Desativar Login Direto de Root           │ ✅ PASS  │ Configuração segura: permitrootlogin no        │
-├───────────────────┼──────────────────────────────────────────┼──────────┼────────────────────────────────────────────────┤
-│ File Permissions  │ Permissões restritas no /etc/shadow      │ ✅ PASS  │ Permissões seguras encontradas: 000            │
-├───────────────────┼──────────────────────────────────────────┼──────────┼────────────────────────────────────────────────┤
-│ User Management   │ Verificar contas com UID 0 (Root)        │ ✅ PASS  │ Apenas o usuário 'root' possui privilégios     │
-├───────────────────┼──────────────────────────────────────────┼──────────┼────────────────────────────────────────────────┤
-│ Network Security  │ Status do Firewall UFW                   │ ❌ FAIL  │ O firewall UFW está inativo. Recomenda-se...   │
-└───────────────────┴──────────────────────────────────────────┴──────────┴────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Categoria         ┃ Item Auditado                            ┃ CIS Benchmark            ┃ Status   ┃ Detalhes / Recomendações                       ┃
+┡━━━━━━━━━━━━━━━━━━━╂━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╂━━━━━━━━━━━━━━━━━━━━━━━━━━╂━━━━━━━━━━╂━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ SSH Security      │ Desativar Login Direto de Root           │ CIS Linux Benchmark 5.2.10 │ ✅ PASS  │ Configuração segura: permitrootlogin no        │
+├───────────────────┼──────────────────────────────────────────┼──────────────────────────┼──────────┼────────────────────────────────────────────────┤
+│ File Permissions  │ Permissões restritas no /etc/shadow      │ N/A                      │ ✅ PASS  │ Permissões seguras encontradas: 000            │
+├───────────────────┼──────────────────────────────────────────┼──────────────────────────┼──────────┼────────────────────────────────────────────────┤
+│ User Management   │ Verificar contas com UID 0 (Root)        │ N/A                      │ ✅ PASS  │ Apenas o usuário 'root' possui privilégios     │
+├───────────────────┼──────────────────────────────────────────┼──────────────────────────┼──────────┼────────────────────────────────────────────────┤
+│ Network Security  │ Status do Firewall UFW                   │ N/A                      │ ❌ FAIL  │ O firewall UFW está inativo. Recomenda-se...   │
+└───────────────────┴──────────────────────────────────────────┴──────────────────────────┴──────────┴────────────────────────────────────────────────┘
 
 ┌───────────────────────────────────────┐
 │           Resumo Executivo            │
