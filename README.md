@@ -58,7 +58,7 @@ Clone o repositório em sua máquina local e instale as dependências necessári
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU_USUARIO/armadillo.git
+git clone https://github.com/blitk/armadillo.git
 cd armadillo
 
 # Instale as dependências
