@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from targets.local_target import LocalTarget
-from targets.remote_target import RemoteTarget
+from target.local_target import LocalTarget
+from target.remote_target import RemoteTarget
 from utils.plugin_loader import load_all_checks
 from utils.reporter import display_results
 from rich.console import Console
