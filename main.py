@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from targets.local_target import LocalTarget
-from targets.remote_target import RemoteTarget
+from target.local_target import LocalTarget
+from target.remote_target import RemoteTarget
 from checks.ssh_audit import run_ssh_checks
 from checks.permissions_audit import run_permission_checks
 from checks.users_audit import run_user_checks
