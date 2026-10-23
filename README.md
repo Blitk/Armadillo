@@ -5,8 +5,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Active](https://img.shields.io/badge/status-active-success.svg)]()
-[![Armadillo CI](https://github.com/blitk/armadillo/actions/workflows/ci.yml/badge.svg)](https://github.com/blitk/armadillo/actions/workflows/ci.yml)
-
+[![Armadillo CI](https://github.com/Blitk/Armadillo/actions/workflows/ci.yml/badge.svg)](https://github.com/blitk/armadillo/actions/workflows/ci.yml)
 
 O **Armadillo** é uma ferramenta leve desenvolvida em Python voltada para equipes de **Blue Team, SOC e Engenharia de Segurança**. O seu objetivo é automatizar a verificação de linhas de base de segurança (*Security Baselines*) em servidores Linux, identificando configurações vulneráveis, permissões incorretas e falhas de conformidade de forma rápida.
 
