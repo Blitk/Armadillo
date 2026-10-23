@@ -1,4 +1,4 @@
-# 🛡️ Armadillo
+# Armadillo
 
 > Ferramenta automatizada de auditoria de *hardening* e conformidade de servidores Linux (Local e Remoto).
 
@@ -10,7 +10,7 @@ O **Armadillo** é uma ferramenta leve desenvolvida em Python voltada para equip
 
 ---
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 - **Arquitetura Agnóstica de Alvo:** Suporte tanto para auditorias locais quanto remotas de forma transparente via **SSH (Paramiko)**.
 - **Módulos de Checagem Abrangentes:**
@@ -24,7 +24,7 @@ O **Armadillo** é uma ferramenta leve desenvolvida em Python voltada para equip
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```text
 server-hardening-auditor/
@@ -52,7 +52,7 @@ server-hardening-auditor/
 
 ---
 
-## ⚙️ Instalação
+## Instalação
 
 Clone o repositório em sua máquina local e instale as dependências necessárias:
 
@@ -67,7 +67,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🕹️ Como Utilizar
+## Como Utilizar
 
 A ferramenta opera através de uma interface de linha de comando (CLI) intuitiva.
 
@@ -77,8 +77,7 @@ Para auditar a própria máquina onde o script está sendo executado:
 ```bash
 python main.py --target local
 ```
-
-> 💡 **Nota:** Algumas checagens de arquivos críticos exigem privilégios elevados. Utilize `sudo python main.py --target local` se necessário.
+ **Nota:** Algumas checagens de arquivos críticos exigem privilégios elevados. Utilize `sudo python main.py --target local` se necessário.
 
 ### 2. Auditoria Remota (via SSH)
 Para conectar e auditar um servidor remoto utilizando uma chave SSH privada:
@@ -103,7 +102,7 @@ Você pode exportar os resultados da auditoria diretamente para arquivos adicion
 
 ---
 
-## 📊 Exemplo de Saída no Terminal
+## Exemplo de Saída no Terminal
 
 ```text
      _    ____  __  __    _    ____  ___ _      _     _____
@@ -149,6 +148,6 @@ Você pode exportar os resultados da auditoria diretamente para arquivos adicion
 
 ---
 
-## 📝 Licença
+## Licença
 
 Distribuído sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
