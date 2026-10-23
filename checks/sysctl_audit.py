@@ -1,4 +1,5 @@
 
+
 def run_sysctl_checks(target) -> list:
     """Audita configurações de segurança do Kernel via sysctl."""
     results = []
@@ -22,7 +23,7 @@ def run_sysctl_checks(target) -> list:
             res_rp["details"] = f"Configuração segura encontrada (rp_filter = {value})."
         else:
             res_rp["status"] = "FAIL"
-            res_rp:: "details" = f"Inseguro: rp_filter está configurado como {value} (Recomendado: 1)."
+            res_rp["details"] = f"Inseguro: rp_filter está configurado como {value} (Recomendado: 1)."
             
     except Exception as e:
         # Caso rode em containers Docker isolados onde sysctl é restrito
