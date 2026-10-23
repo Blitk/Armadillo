@@ -1,0 +1,3 @@
+paramiko==3.5.0
+rich==13.9.4
+PyYAML==6.0.2
