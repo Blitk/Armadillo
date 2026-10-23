@@ -1,4 +1,3 @@
-
 import json
 import os
 from datetime import datetime
@@ -15,6 +14,7 @@ def display_results(results: list, export_format: str = None, target_name: str =
     
     table.add_column("Categoria", style="cyan", no_wrap=True)
     table.add_column("Item Auditado", style="magenta")
+    table.add_column("CIS Benchmark", style="blue", justify="center")
     table.add_column("Status", justify="center", style="bold")
     table.add_column("Detalhes / Recomendações", style="white")
 
@@ -23,6 +23,7 @@ def display_results(results: list, export_format: str = None, target_name: str =
 
     for res in results:
         status = res["status"]
+        cis_ref = res.get("cis", "N/A") # Recupera o CIS Benchmark se houver
         
         if status == "PASS":
             status_display = "[green]✅ PASS[/green]"
@@ -37,6 +38,7 @@ def display_results(results: list, export_format: str = None, target_name: str =
         table.add_row(
             res["category"],
             res["check"],
+            cis_ref,
             status_display,
             res["details"]
         )
@@ -71,7 +73,7 @@ def _export_report(results: list, score: float, passed: int, total: int, fmt: st
                 "passed_checks": passed,
                 "compliance_score": round(score, 2)
             },
-            "results": results
+            "results": results  # Já inclui o campo 'cis' automaticamente
         }
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(report_data, f, indent=4, ensure_ascii=False)
@@ -87,12 +89,13 @@ def _export_report(results: list, score: float, passed: int, total: int, fmt: st
 
 ## Resultados Detalhados
 
-| Categoria | Item Auditado | Status | Detalhes / Recomendações |
-| :--- | :--- | :---: | :--- |
+| Categoria | Item Auditado | CIS Benchmark | Status | Detalhes / Recomendações |
+| :--- | :--- | :---: | :---: | :--- |
 """
         for res in results:
             status_emoji = "✅ PASS" if res["status"] == "PASS" else "❌ FAIL" if res["status"] == "FAIL" else "⚠️ WARNING"
-            md_content += f"| {res['category']} | {res['check']} | {status_emoji} | {res['details']} |\n"
+            cis_ref = res.get("cis", "N/A")
+            md_content += f"| {res['category']} | {res['check']} | {cis_ref} | {status_emoji} | {res['details']} |\n"
 
         with open(filename, "w", encoding="utf-8") as f:
             f.write(md_content)
