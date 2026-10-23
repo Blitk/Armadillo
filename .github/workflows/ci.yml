@@ -27,7 +27,8 @@ jobs:
 
     - name: 🧪 Executar Testes Unitários com Pytest
       run: |
-        pytest -v
+        PYTHONPATH=. pytest -v
+
 
     - name: 🛡️ Testar Execução da CLI (Dry-Run / Help)
       run: |
