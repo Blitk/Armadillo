@@ -28,6 +28,7 @@ def main():
     
     parser = argparse.ArgumentParser(description="Armadillo - Auditor de Hardening e Conformidade de Servidores")
     parser.add_argument("--target", choices=["local", "remote"], required=True, help="Define se o alvo é local ou remoto.")
+    parser.add_argument("--export", choices=["json", "markdown"], help="Exporta o relatório gerado para JSON ou Markdown.")
     
     # Argumentos para conexão remota
     parser.add_argument("--host", help="Endereço IP ou hostname do servidor remoto.")
@@ -76,10 +77,13 @@ def main():
         #Coleta resultados do firewall
         all_results.extend(run_firewall_checks(target))
 
+        target_name = "local" if args.target == "local" else args.host
+
         console.print("\n[+] Auditoria concluída com sucesso! Gerando relatório...\n", style="bold green")
         
-        # Exibe o relatório formatado com Rich
-        display_results(all_results)
+        # Exibe e exporta o relatório formatado
+        display_results(all_results, export_format=args.export, target_name=target_name)
+
 
     except Exception as e:
         console.print(f"\n[!] Erro crítico durante a execução do Armadillo: {str(e)}", style="bold red")
