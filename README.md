@@ -14,10 +14,10 @@ O **Armadillo** é uma ferramenta leve desenvolvida em Python voltada para equip
 
 - **Arquitetura Agnóstica de Alvo:** Suporte tanto para auditorias locais quanto remotas de forma transparente via **SSH (Paramiko)**.
 - **Módulos de Checagem Abrangentes:**
-  - 🔒 **SSH Security:** Validação de diretivas críticas (como `PermitRootLogin`).
-  - 📁 **File Permissions:** Verificação de permissões sensíveis em arquivos vitais (ex: `/etc/shadow`).
-  - 👥 **User Management:** Detecção de contas secundárias com privilégios totais (`UID 0`).
-  - 🌐 **Network Security:** Monitoramento do estado do firewall (`UFW`).
+  -  **SSH Security:** Validação de diretivas críticas (como `PermitRootLogin`).
+  -  **File Permissions:** Verificação de permissões sensíveis em arquivos vitais (ex: `/etc/shadow`).
+  -  **User Management:** Detecção de contas secundárias com privilégios totais (`UID 0`).
+  -  **Network Security:** Monitoramento do estado do firewall (`UFW`).
 - **Resumo Gerencial e Compliance Score:** Cálculo automático de pontuação de conformidade com base nos resultados das checagens.
 - **Interface Visual Rica:** Relatórios coloridos no terminal baseados na biblioteca `Rich`.
 - **Exportação de Relatórios:** Capacidade de gerar relatórios executivos em formatos estruturados (`JSON` e `Markdown`).
