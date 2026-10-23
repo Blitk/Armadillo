@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from target.local_target import LocalTarget
-from target.remote_target import RemoteTarget
-from checks.ssh_audit import run_ssh_checks
-from checks.permissions_audit import run_permission_checks
-from checks.users_audit import run_user_checks
-from checks.firewall_audit import run_firewall_checks
+from targets.local_target import LocalTarget
+from targets.remote_target import RemoteTarget
+from utils.plugin_loader import load_all_checks
 from utils.reporter import display_results
 from rich.console import Console
 
@@ -62,20 +59,21 @@ def main():
         target.connect()
         console.print("[+] Conexão estabelecida com sucesso!\n", style="bold green")
 
-        # Executando todas as baterias de checagens de segurança
+        # Carrega os plugins de checagem automaticamente da pasta checks/
+        console.print("[*] Carregando plugins de auditoria...", style="yellow")
+        audit_functions = load_all_checks()
+        console.print(f"[+] {len(audit_functions)} módulos de checagem carregados com sucesso.\n", style="bold green")
+
+        # Executando todas as baterias de checagens de segurança dinamicamente
         console.print("[*] Executando módulos de auditoria...", style="yellow")
         
-        # Coleta resultados do SSH
-        all_results.extend(run_ssh_checks(target))
-        
-        # Coleta resultados de Permissões
-        all_results.extend(run_permission_checks(target))
-
-        #Coleta resultados do usuario
-        all_results.extend(run_user_checks(target))
-
-        #Coleta resultados do firewall
-        all_results.extend(run_firewall_checks(target))
+        for audit_func in audit_functions:
+            try:
+                results = audit_func(target)
+                if isinstance(results, list):
+                    all_results.extend(results)
+            except Exception as func_err:
+                console.print(f"[!] Erro ao executar o módulo {audit_func.__name__}: {str(func_err)}", style="red")
 
         target_name = "local" if args.target == "local" else args.host
 
@@ -83,7 +81,6 @@ def main():
         
         # Exibe e exporta o relatório formatado
         display_results(all_results, export_format=args.export, target_name=target_name)
-
 
     except Exception as e:
         console.print(f"\n[!] Erro crítico durante a execução do Armadillo: {str(e)}", style="bold red")
