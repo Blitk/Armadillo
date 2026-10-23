@@ -37,7 +37,7 @@ server-hardening-auditor/
 │   └── users_audit.py
 │
 ├── reports/                 # Pasta de saída dos relatórios exportados (JSON / MD)
-├── targets/                 # Camada de abstração de alvos
+├── target/                 # Camada de abstração de alvos
 │   ├── __init__.py
 │   ├── local_target.py
 │   └── remote_target.py
